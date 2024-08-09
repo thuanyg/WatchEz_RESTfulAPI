@@ -31,4 +31,4 @@ Welcome to the WatchEz Backend RESTful API! This project is built with Java Spri
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/watchez-backend.git
+   git clone [https://github.com/yourusername/watchez-backend.git](https://github.com/thuanyg/WatchEz_RESTfulAPI.git)
