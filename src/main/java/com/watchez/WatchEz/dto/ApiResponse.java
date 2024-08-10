@@ -1,15 +1,17 @@
 package com.watchez.WatchEz.dto;
 
 import lombok.*;
-import lombok.experimental.FieldNameConstants;
+import lombok.experimental.FieldDefaults;
+
 
 @Data
-@FieldNameConstants(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class ApiResponse<T> {
-    int statusCode;
+    @Builder.Default
+    int statusCode = 200;
     String message;
     T data;
 }
