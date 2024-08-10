@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3306/watchez_db"
-    username: root
-    password: root
+    url: "jdbc:mysql://svr-freehost.vinahost.vn:3306/cqfzvzkv_watchez?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+    username: cqfzvzkv_thuanht
+    password: thuan2k3yg
   jpa:
     hibernate:
       ddl-auto: update
