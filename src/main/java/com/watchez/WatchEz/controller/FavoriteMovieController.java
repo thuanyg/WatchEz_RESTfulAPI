@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/favourites")
+@RequestMapping("/favorites")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class FavoriteMovieController {

@@ -83,6 +83,7 @@ public class UserService {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .gender(user.getGender())
+                .email(user.getEmail())
                 .dob(user.getDob())
                 .avatarUrl(user.getAvatarUrl())
                 .build();
@@ -123,6 +124,7 @@ public class UserService {
                 .firstName(userToUpdate.getFirstName())
                 .lastName(userToUpdate.getLastName())
                 .gender(userToUpdate.getGender())
+                .email(userToUpdate.getEmail())
                 .dob(userToUpdate.getDob())
                 .avatarUrl(userToUpdate.getAvatarUrl())
                 .build();
