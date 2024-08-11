@@ -17,6 +17,6 @@ public class GlobalExceptionHandle {
                 .data(null)
                 .build();
 
-        return ResponseEntity.badRequest().body(apiResponse);
+        return ResponseEntity.ok().body(apiResponse);
     }
 }
