@@ -10,6 +10,5 @@ import lombok.experimental.FieldNameConstants;
 @FieldNameConstants(level = AccessLevel.PRIVATE)
 public class AuthRequest {
     String username;
-    String email;
     String password;
 }

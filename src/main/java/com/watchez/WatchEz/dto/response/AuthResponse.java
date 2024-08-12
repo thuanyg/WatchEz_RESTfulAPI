@@ -10,4 +10,5 @@ import lombok.experimental.FieldNameConstants;
 @FieldNameConstants(level = AccessLevel.PRIVATE)
 public class AuthResponse {
     boolean success;
+    String token;
 }

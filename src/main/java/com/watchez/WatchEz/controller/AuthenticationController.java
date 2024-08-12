@@ -25,15 +25,9 @@ public class AuthenticationController {
 
     @PostMapping
     ApiResponse<AuthResponse> loginAuthenticate(@RequestBody AuthRequest authRequest) {
-        boolean isSuccess = authService.authenticate(authRequest);
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.setSuccess(isSuccess);
-        return isSuccess ? ApiResponse.<AuthResponse>builder()
+        AuthResponse authResponse = authService.authenticate(authRequest);
+        return ApiResponse.<AuthResponse>builder()
                 .message("Success")
-                .data(authResponse)
-                .build() : ApiResponse.<AuthResponse>builder()
-                .statusCode(ErrorCode.INVALID_LOGIN.getCode())
-                .message("Username or password invalid.")
                 .data(authResponse)
                 .build();
     }
