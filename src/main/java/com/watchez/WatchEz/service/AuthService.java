@@ -2,9 +2,12 @@ package com.watchez.WatchEz.service;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 import com.watchez.WatchEz.dto.request.AuthRequest;
 import com.watchez.WatchEz.dto.response.AuthResponse;
+import com.watchez.WatchEz.dto.response.VerifyTokenResponse;
 import com.watchez.WatchEz.exception.AppException;
 import com.watchez.WatchEz.exception.ErrorCode;
 import com.watchez.WatchEz.repository.UserRepository;
@@ -18,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -87,6 +91,24 @@ public class AuthService {
             return jwsObject.serialize();
         } catch (JOSEException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public VerifyTokenResponse VerifyToken(String token) throws JOSEException, ParseException {
+        try {
+            JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
+
+            SignedJWT signedJWT = SignedJWT.parse(token);
+
+            Date expirationDate = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+            String userID = signedJWT.getJWTClaimsSet().getStringClaim("userid");
+
+            boolean verified = signedJWT.verify(verifier);
+
+            return new VerifyTokenResponse(verified && expirationDate.after(new Date()), userID);
+        } catch (Exception e) {
+            return new VerifyTokenResponse(false, null);
         }
     }
 }

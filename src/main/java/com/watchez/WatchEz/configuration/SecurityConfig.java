@@ -24,7 +24,7 @@ public class SecurityConfig {
 
         // Allow endpoint /users with method Post
         httpSecurity.authorizeHttpRequests(requests ->
-                requests.requestMatchers(HttpMethod.POST, "/users", "/auth").permitAll()
+                requests.requestMatchers(HttpMethod.POST, "/users", "/auth", "/auth/verify").permitAll()
                         .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(oauth2 ->
