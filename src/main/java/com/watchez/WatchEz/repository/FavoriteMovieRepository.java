@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface FavoriteMovieRepository extends JpaRepository<FavoriteMovie, Long> {
     List<FavoriteMovie> findByUser_Id(String user_id);
-    boolean existsByUser_IdAndMovieId(String user_id, String movie_id);
+    boolean existsByUser_IdAndSlug(String user_id, String slug);
 }

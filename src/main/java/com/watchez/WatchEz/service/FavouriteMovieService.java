@@ -29,16 +29,28 @@ public class FavouriteMovieService {
     FavoriteMovieRepository favoriteMovieRepo;
     UserRepository userRepo;
 
-    public ApiResponse<List<FavoriteMovieResponse>> getFavoriteMoviesByUserID(String userID) {
+    public ApiResponse<List<FavoriteListResponse>> getFavoriteMoviesByUserID(String userID) {
 
         userRepo.findById(userID).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         List<FavoriteMovie> favoriteMovies = favoriteMovieRepo.findByUser_Id(userID);
-        List<FavoriteMovieResponse> movieResponseList = new ArrayList<>();
+
+        List<FavoriteListResponse> movieResponseList = new ArrayList<>();
         favoriteMovies.forEach(f -> {
-            movieResponseList.add(new FavoriteMovieResponse(f.getFavoriteMovie_id(), f.getUser().getId(), f.getMovieId()));
+            movieResponseList.add(FavoriteListResponse.builder().
+                    favoriteMovieId(f.getFavoriteMovie_id())
+                    .user_id(f.getUser().getId())
+                    .slug(f.getSlug())
+                    .name(f.getName())
+                    .quality(f.getQuality())
+                    .language(f.getLanguage())
+                    .genres(f.getGenres())
+                    .save_date(f.getSave_date()).
+                    build()
+            );
         });
-        return ApiResponse.<List<FavoriteMovieResponse>>builder()
+
+        return ApiResponse.<List<FavoriteListResponse>>builder()
                 .message("Get list of favorite movies successfully")
                 .data(movieResponseList)
                 .build();
@@ -49,20 +61,26 @@ public class FavouriteMovieService {
         User user = userRepo.findById(dataRequest.getUser_id())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        if (favoriteMovieRepo.existsByUser_IdAndMovieId(dataRequest.getUser_id(), dataRequest.getMovie_id()))
+        if (favoriteMovieRepo.existsByUser_IdAndSlug(dataRequest.getUser_id(), dataRequest.getSlug()))
             throw new AppException(ErrorCode.MOVIE_SAVE_EXISTED);
 
         FavoriteMovie favoriteMovie = new FavoriteMovie();
-        favoriteMovie.setMovieId(dataRequest.getMovie_id());
+        favoriteMovie.setSlug(dataRequest.getSlug());
         favoriteMovie.setUser(user);
+        favoriteMovie.setName(dataRequest.getName());
+        favoriteMovie.setQuality(dataRequest.getQuality());
+        favoriteMovie.setLanguage(dataRequest.getLanguage());
+        favoriteMovie.setGenres(dataRequest.getGenres());
+        favoriteMovie.setSave_date(dataRequest.getSave_date());
+
         favoriteMovieRepo.save(favoriteMovie);
 
         FavoriteMovieResponse favoriteMovieResponse = new FavoriteMovieResponse();
-        favoriteMovieResponse.setMovie_id(favoriteMovie.getMovieId());
+        favoriteMovieResponse.setSlug(favoriteMovie.getSlug());
         favoriteMovieResponse.setUser_id(user.getId());
 
         return ApiResponse.<FavoriteMovieResponse>builder()
-                .message("Get list of favorite movies successfully")
+                .message("Create favorite movies successfully")
                 .data(favoriteMovieResponse)
                 .build();
     }

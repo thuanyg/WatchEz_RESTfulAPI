@@ -2,6 +2,7 @@ package com.watchez.WatchEz.controller;
 
 import com.watchez.WatchEz.dto.ApiResponse;
 import com.watchez.WatchEz.dto.request.FavoriteMovieRequest;
+import com.watchez.WatchEz.dto.response.FavoriteListResponse;
 import com.watchez.WatchEz.dto.response.FavoriteMovieResponse;
 import com.watchez.WatchEz.repository.FavoriteMovieRepository;
 import com.watchez.WatchEz.service.FavouriteMovieService;
@@ -21,7 +22,7 @@ public class FavoriteMovieController {
     FavouriteMovieService favouriteMovieService;
 
     @GetMapping("/{userid}")
-    ApiResponse<List<FavoriteMovieResponse>> getFavoriteMoviesByUserID(@PathVariable("userid") String userid) {
+    ApiResponse<List<FavoriteListResponse>> getFavoriteMoviesByUserID(@PathVariable("userid") String userid) {
         return favouriteMovieService.getFavoriteMoviesByUserID(userid);
     }
 

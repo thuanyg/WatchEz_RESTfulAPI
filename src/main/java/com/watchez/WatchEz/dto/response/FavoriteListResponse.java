@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -12,6 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FavoriteListResponse {
+    Long favoriteMovieId;
     String user_id;
-    List<String> movie_ids;
+    String slug;
+    String name;
+    String quality;
+    String language;
+    String genres;
+    Date save_date;
 }

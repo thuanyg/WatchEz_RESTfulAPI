@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FavoriteMovieResponse {
-
-    Long favoriteMovieId;
-    String movie_id;
+    String slug;
     String user_id;
 
 }

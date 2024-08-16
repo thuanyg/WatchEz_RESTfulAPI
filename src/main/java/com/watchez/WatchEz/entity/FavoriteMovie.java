@@ -6,9 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "favorite_movies")
+@Table(name = "favorites")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +25,12 @@ public class FavoriteMovie {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "movie_id") // Tên cột cho movieId
-    private String movieId;
+    @Column(name = "slug")
+    private String slug;
+
+    String name;
+    String quality;
+    String language;
+    String genres;
+    Date save_date;
 }
