@@ -68,6 +68,7 @@ public class FavouriteMovieService {
         favoriteMovie.setSlug(dataRequest.getSlug());
         favoriteMovie.setUser(user);
         favoriteMovie.setName(dataRequest.getName());
+        favoriteMovie.setPosterUrl(dataRequest.getPosterUrl());
         favoriteMovie.setQuality(dataRequest.getQuality());
         favoriteMovie.setLanguage(dataRequest.getLanguage());
         favoriteMovie.setGenres(dataRequest.getGenres());

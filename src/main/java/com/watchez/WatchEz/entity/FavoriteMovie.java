@@ -29,6 +29,7 @@ public class FavoriteMovie {
     private String slug;
 
     String name;
+    String posterUrl;
     String quality;
     String language;
     String genres;

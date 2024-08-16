@@ -17,6 +17,7 @@ public class FavoriteListResponse {
     String user_id;
     String slug;
     String name;
+    String posterUrl;
     String quality;
     String language;
     String genres;
