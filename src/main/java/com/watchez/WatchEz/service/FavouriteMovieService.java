@@ -42,6 +42,7 @@ public class FavouriteMovieService {
                     .user_id(f.getUser().getId())
                     .slug(f.getSlug())
                     .name(f.getName())
+                    .posterUrl(f.getPosterUrl())
                     .quality(f.getQuality())
                     .language(f.getLanguage())
                     .genres(f.getGenres())
